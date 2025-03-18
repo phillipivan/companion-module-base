@@ -158,11 +158,11 @@ export function parseEscapeCharacters(msg: string): string {
 		.replaceAll('\\f', '\f')
 		.replaceAll('\\v', '\v')
 		.replaceAll('\\b', '\b')
-		.replaceAll('\\\\', '\\')
 		.replaceAll('\\x00', '\x00')
 		.replaceAll('\\x01', '\x01')
 		.replaceAll('\\x02', '\x02')
 		.replaceAll('\\x03', '\x03')
+		.replaceAll('\\\\', '\\')
 	return message
 }
 
@@ -173,13 +173,13 @@ export function parseEscapeCharacters(msg: string): string {
 
 export function substituteEscapeCharacters(msg: string): string {
 	const message = msg
+		.replaceAll('\\', '\\\\')
 		.replaceAll('\n', '\\n')
 		.replaceAll('\r', '\\r')
 		.replaceAll('\t', '\\t')
 		.replaceAll('\f', '\\f')
 		.replaceAll('\v', '\\v')
 		.replaceAll('\b', '\\b')
-		.replaceAll('\\', '\\\\')
 		.replaceAll('\x00', '\\x00')
 		.replaceAll('\x01', '\\x01')
 		.replaceAll('\x02', '\\x02')
