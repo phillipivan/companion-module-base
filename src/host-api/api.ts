@@ -59,8 +59,9 @@ export interface HostToModuleEventsV0SharedSocket {
 	sharedUdpSocketError: (msg: SharedUdpSocketError) => never
 }
 
-export type EncodeIsVisible<T extends CompanionInputFieldBase> = Omit<T, 'isVisible'> & {
+export type EncodeIsVisible<T extends CompanionInputFieldBase> = Omit<T, 'isVisible' | 'isVisibleExpression'> & {
 	isVisibleFn?: string
+	isVisibleFnType?: 'function' | 'expression'
 }
 
 export interface InitMessage {
@@ -117,6 +118,7 @@ export interface SetActionDefinitionsMessage {
 		options: EncodeIsVisible<SomeCompanionActionInputField>[] // TODO module-lib - versioned types?
 		hasLearn: boolean
 		learnTimeout: number | undefined
+		hasLifecycleFunctions: boolean // Since 1.12.0
 	}>
 }
 

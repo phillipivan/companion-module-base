@@ -25,16 +25,36 @@ export interface CompanionInputFieldBase {
 	label: string
 	/** A hover tooltip for this field */
 	tooltip?: string
+
 	/**
+	 * @deprecated This will be removed in 2.0.0 of this api. Use `isVisibleExpression` instead.
+	 *
 	 * A function called to check whether this input should be visible, based on the current options selections within the input group
 	 *
 	 * Note: This function must not depend on anything outside of its scope. If it does it will fail to compile and will be skipped.
+	 *
+	 * Note: If both this and `isVisibleExpression` are provided, `isVisibleExpression` will take precedence.
 	 */
 	isVisible?: (options: CompanionOptionValues, data: any | undefined) => boolean
+
 	/**
-	 * JSON serializable data to provide to `isVisible`
+	 * A companion expression to check whether this input should be visible, based on the current options selections within the input group
+	 *
+	 * This is the same syntax as other expressions written inside of Comapnion.
+	 * You can access a value of the current options using `$(options:some_field_id)`.
+	 * This does not support the `isVisibleData` property, let us know if you need this.
+	 *
+	 * Note: If both this and `isVisible` are provided, this will take precedence.
 	 */
-	isVisibleData?: any
+	isVisibleExpression?: string
+	/**
+	 * @deprecated This will be removed in 2.0.0 of this api. Use `isVisibleExpression` instead.
+	 *
+	 * A JSON serializable object to provide as extra input to `isVisible`
+	 *
+	 * If you think you need this with `isVisibleExpression`, we want to hear why.
+	 */
+	isVisibleData?: Record<string, any>
 }
 
 /**
@@ -96,7 +116,7 @@ export interface CompanionInputFieldColor extends CompanionInputFieldBase {
 	/**
 	 * The default color value to set when creating this action/feedback/instance
 	 * Can be a color string or a color number
-	 * Valid strings are CSS color strings in Hex, RGB, HSL or HSV notation with ot without alpha
+	 * Valid strings are CSS color strings in Hex, RGB, HSL or HSV notation with or without alpha
 	 * Valid numbers are 0x0 - 0xffffffff, where the components are ttrrggbb, you can generate the number with combineRgb()
 	 *
 	 * ### Examples for red
