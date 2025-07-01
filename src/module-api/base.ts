@@ -202,7 +202,7 @@ export abstract class InstanceBase<TConfig> implements InstanceBaseShared<TConfi
 			// Now we can initialise the module
 			try {
 				await this.init(this.#lastConfig, !!msg.isFirstInit)
-
+				process.title = msg.label.replaceAll(/[^a-zA-Z0-9-_.]/gm, '')
 				this.#initialized = true
 			} catch (e) {
 				console.trace(`Init failed: ${e}`)
@@ -247,6 +247,7 @@ export abstract class InstanceBase<TConfig> implements InstanceBaseShared<TConfi
 			this.#lastConfig = msg.config as TConfig
 
 			await this.configUpdated(this.#lastConfig)
+			process.title = msg.label.replaceAll(/[^a-zA-Z0-9-_.]/gm, '')
 		})
 	}
 	private async _handleExecuteAction(msg: ExecuteActionMessage): Promise<void> {
