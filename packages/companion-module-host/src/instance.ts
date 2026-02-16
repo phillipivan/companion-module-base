@@ -110,6 +110,9 @@ export class InstanceWrapper<TManifest extends InstanceTypes> {
 			checkFeedbacks: (feedbackTypes) => {
 				this.#feedbackManager.checkFeedbacks(feedbackTypes)
 			},
+			checkAllFeedbacks: () => {
+				this.#feedbackManager.checkFeedbacks(null)
+			},
 			checkFeedbacksById: (feedbackIds) => {
 				this.#feedbackManager.checkFeedbacksById(feedbackIds)
 			},

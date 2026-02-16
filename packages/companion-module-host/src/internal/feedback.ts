@@ -323,8 +323,8 @@ export class FeedbackManager {
 		}
 	}
 
-	checkFeedbacks(feedbackTypes: string[]): void {
-		const types = new Set(feedbackTypes)
+	checkFeedbacks(feedbackTypes: string[] | null): void {
+		const types = feedbackTypes ? new Set(feedbackTypes) : new Set()
 		for (const [id, feedback] of this.#feedbackInstances.entries()) {
 			const definition = this.#feedbackDefinitions.get(feedback.feedbackId)
 			if (definition) {

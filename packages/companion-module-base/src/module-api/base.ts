@@ -202,15 +202,33 @@ export abstract class InstanceBase<TManifest extends InstanceTypes = InstanceTyp
 	}
 
 	/**
-	 * Request all feedbacks of the specified types to be checked for changes
-	 * @param feedbackTypes The feedback types to check
+	 * Request all feedbacks of all types to be re-executed
 	 */
-	checkFeedbacks(...feedbackTypes: StringKeys<TManifest['feedbacks']>[]): void {
-		this.#context.checkFeedbacks(feedbackTypes)
+	checkAllFeedbacks(): void {
+		this.#context.checkAllFeedbacks()
 	}
 
 	/**
-	 * Request the specified feedback instances to be checked for changes
+	 * Request all feedbacks of the specified types to be re-executed.
+	 * At least one feedback type must be provided.
+	 * @param feedbackType The first feedback type to check
+	 * @param feedbackTypes Additional feedback types to check
+	 */
+	checkFeedbacks(
+		feedbackType: StringKeys<TManifest['feedbacks']>,
+		...feedbackTypes: StringKeys<TManifest['feedbacks']>[]
+	): void {
+		if (!feedbackType) {
+			this.#logger.error(
+				'checkFeedbacks called without any feedback types. This is not allowed, at least one feedback type must be provided',
+			)
+			return
+		}
+		this.#context.checkFeedbacks([feedbackType, ...feedbackTypes])
+	}
+
+	/**
+	 * Request the specified feedback instances to be be re-executed
 	 * @param feedbackIds The ids of the feedback instances to check
 	 */
 	checkFeedbacksById(...feedbackIds: string[]): void {

@@ -46,6 +46,7 @@ export interface InstanceContext<TManifest extends InstanceTypes> extends Instan
 	setFeedbackDefinitions: (feedbacks: CompanionFeedbackDefinitions<TManifest['feedbacks']>) => void
 	unsubscribeFeedbacks: (feedbackIds: string[]) => void
 	checkFeedbacks: (feedbackTypes: StringKeys<TManifest['feedbacks']>[]) => void
+	checkAllFeedbacks: () => void
 	checkFeedbacksById: (feedbackIds: string[]) => void
 
 	setPresetDefinitions: (
