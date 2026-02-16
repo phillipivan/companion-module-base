@@ -324,6 +324,16 @@ export class FeedbackManager {
 	}
 
 	checkFeedbacks(feedbackTypes: string[] | null): void {
+		if (feedbackTypes) {
+			feedbackTypes = feedbackTypes.filter((t) => !!t)
+			if (feedbackTypes.length === 0) {
+				this.#logger.error(
+					'checkFeedbacks cannot be called without any feedback types. This is not allowed, at least one feedback type must be provided',
+				)
+				return
+			}
+		}
+
 		const types = feedbackTypes ? new Set(feedbackTypes) : new Set()
 		for (const [id, feedback] of this.#feedbackInstances.entries()) {
 			const definition = this.#feedbackDefinitions.get(feedback.feedbackId)

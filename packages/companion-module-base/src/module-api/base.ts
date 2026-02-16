@@ -218,12 +218,6 @@ export abstract class InstanceBase<TManifest extends InstanceTypes = InstanceTyp
 		feedbackType: StringKeys<TManifest['feedbacks']>,
 		...feedbackTypes: StringKeys<TManifest['feedbacks']>[]
 	): void {
-		if (!feedbackType) {
-			this.#logger.error(
-				'checkFeedbacks called without any feedback types. This is not allowed, at least one feedback type must be provided',
-			)
-			return
-		}
 		this.#context.checkFeedbacks([feedbackType, ...feedbackTypes])
 	}
 
