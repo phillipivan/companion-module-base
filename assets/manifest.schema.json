@@ -116,6 +116,10 @@
 						"filesystem": {
 							"type": "boolean",
 							"description": "Enable if the module requires read/write access to the filesystem"
+						},
+						"insecure-algorithms": {
+							"type": "boolean",
+							"description": "Enable if the module requires legacy openssl algorithms"
 						}
 					},
 					"additionalProperties": false
