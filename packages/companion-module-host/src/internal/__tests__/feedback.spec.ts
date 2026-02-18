@@ -300,7 +300,7 @@ describe('FeedbackManager', () => {
 			expect(mockDefinition2.callback).toHaveBeenCalledTimes(0)
 
 			// check all
-			manager.checkFeedbacks([])
+			manager.checkFeedbacks(null)
 
 			await runAllTimers()
 			expect(mockDefinition.callback).toHaveBeenCalledTimes(1)
@@ -431,7 +431,7 @@ describe('FeedbackManager', () => {
 			expect(mockDefinition.callback).toHaveBeenCalledTimes(0)
 
 			// check all
-			manager.checkFeedbacks([])
+			manager.checkFeedbacks(null)
 
 			await runAllTimers()
 			expect(mockDefinition.callback).toHaveBeenCalledTimes(1)
@@ -456,7 +456,7 @@ describe('FeedbackManager', () => {
 			waitForManualResolve = true
 
 			// check all
-			manager.checkFeedbacks([])
+			manager.checkFeedbacks(null)
 
 			// make sure it hasnt completed yet
 			await runAllTimers()
@@ -490,7 +490,7 @@ describe('FeedbackManager', () => {
 			waitForManualResolve = true
 
 			// check all
-			manager.checkFeedbacks([])
+			manager.checkFeedbacks(null)
 
 			// make sure it hasnt completed yet
 			await runAllTimers()
@@ -500,7 +500,7 @@ describe('FeedbackManager', () => {
 
 			// trigger it to be checked again
 			waitForManualResolve = false
-			manager.checkFeedbacks([])
+			manager.checkFeedbacks(null)
 
 			// make sure the second doesnt start by itself
 			await runAllTimers()
