@@ -180,7 +180,7 @@ export abstract class InstanceBase<TManifest extends InstanceTypes = InstanceTyp
 	 * Set the variable definitions for this instance
 	 * @param variables The variable definitions
 	 */
-	setVariableDefinitions(variables: CompanionVariableDefinition[]): void {
+	setVariableDefinitions(variables: CompanionVariableDefinition<TManifest['variables']>[]): void {
 		this.#context.setVariableDefinitions(variables)
 	}
 
