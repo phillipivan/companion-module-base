@@ -14,6 +14,11 @@ on:
         options:
           - base
           - host
+      publish-docs:
+        description: 'Publish docs (only applies to base package)'
+        required: false
+        type: boolean
+        default: false
 
 permissions:
   contents: read
@@ -65,6 +70,7 @@ jobs:
       package-path: ${{ steps.determine.outputs.package-path }}
       tag: ${{ steps.determine.outputs.tag }}
       prerelease: ${{ steps.determine.outputs.prerelease }}
+      publish-docs: ${{ steps.determine.outputs.publish-docs }}
     steps:
       - uses: actions/checkout@v6
         with:
@@ -102,6 +108,7 @@ jobs:
             
             echo "tag=${TAG}" >> $GITHUB_OUTPUT
             echo "prerelease=${PRERELEASE}" >> $GITHUB_OUTPUT
+            echo "publish-docs=${{ github.event.inputs.publish-docs }}" >> $GITHUB_OUTPUT
           else
             # Tag push - parse tag name
             TAG="${{ github.ref_name }}"
@@ -118,6 +125,7 @@ jobs:
               exit 1
             fi
             echo "tag=latest" >> $GITHUB_OUTPUT
+            echo "publish-docs=true" >> $GITHUB_OUTPUT
           fi
 
           echo "package-name=${PACKAGE_NAME}" >> $GITHUB_OUTPUT
@@ -170,13 +178,13 @@ jobs:
           if-no-files-found: error
 
       - name: Prepare docs
-        if: ${{ needs.determine-package.outputs.tag == 'latest' && needs.determine-package.outputs.package-short-name == 'base' }}
+        if: ${{ needs.determine-package.outputs.publish-docs == 'true' && needs.determine-package.outputs.package-short-name == 'base' }}
         run: |
           cd packages/companion-module-base
           yarn docs:html
 
       - name: Upload docs artifact
-        if: ${{ needs.determine-package.outputs.tag == 'latest' && needs.determine-package.outputs.package-short-name == 'base' }}
+        if: ${{ needs.determine-package.outputs.publish-docs == 'true' && needs.determine-package.outputs.package-short-name == 'base' }}
         uses: actions/upload-pages-artifact@v4
         with:
           path: packages/companion-module-base/docs/
@@ -233,7 +241,7 @@ jobs:
       pages: write # to deploy to Pages
       id-token: write # to verify the deployment originates from an appropriate source
 
-    if: ${{ needs.determine-package.outputs.tag == 'latest' && needs.determine-package.outputs.package-short-name == 'base' }}
+    if: ${{ needs.determine-package.outputs.publish-docs == 'true' && needs.determine-package.outputs.package-short-name == 'base' }}
 
     # Deploy to the github-pages environment
     environment:
