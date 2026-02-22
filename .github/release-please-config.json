@@ -7,12 +7,18 @@
 		"packages/companion-module-base": {
 			"release-type": "node",
 			"component": "companion-module-base",
-			"package-name": "@companion-module/base"
+			"package-name": "@companion-module/base",
+
+			"prerelease": true,
+			"prerelease-type": "alpha"
 		},
 		"packages/companion-module-host": {
 			"release-type": "node",
 			"component": "companion-module-host",
-			"package-name": "@companion-module/host"
+			"package-name": "@companion-module/host",
+
+			"prerelease": true,
+			"prerelease-type": "alpha"
 		}
 	}
 }
