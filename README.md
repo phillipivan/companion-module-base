@@ -2,6 +2,14 @@
 
 Monorepo for Companion module plugin libraries.
 
+## Creating a Module Plugin
+
+Use the [TypeScript template](https://github.com/bitfocus/companion-module-template-ts) or [Javascript template](https://github.com/bitfocus/companion-module-template-js) to get started.
+
+Your plugin only needs to depend on `@companion-module/base`. The host package is used by Companion itself.
+
+Find full documentation on how to create a module [on the website](https://companion.free/for-developers/module-development/home)
+
 ## Packages
 
 - **[@companion-module/base](packages/companion-module-base/)** - Plugin API for writing module integrations. Small, stable, versioned conservatively.
@@ -25,12 +33,6 @@ yarn lint
 # Run tests
 yarn unit
 ```
-
-## Creating a Module Plugin
-
-Use the [TypeScript template](https://github.com/bitfocus/companion-module-template-ts) or [Javascript template](https://github.com/bitfocus/companion-module-template-js) to get started.
-
-Your plugin only needs to depend on `@companion-module/base`. The host package is used by Companion itself.
 
 ## Architecture
 
