@@ -3,6 +3,9 @@
 
 	"bootstrap-sha": "3cd7a4adaf2075263d611d642685e003572a84a0",
 
+	"prerelease": true,
+	"prerelease-type": "alpha",
+
 	"packages": {
 		"packages/companion-module-base": {
 			"release-type": "node",
